@@ -1,0 +1,29 @@
+---
+openapi: 3.0.0
+info:
+  description: "Whoamip is a web service that returns your current IP address."
+  version: "1.0.0"
+  title: "Whoamip"
+
+components:
+  schemas:
+    Result:
+      type: object
+      properties:
+        ip:
+          type: string
+          example: "27.133.16.173"
+
+paths:
+  /:
+    get:
+      tags:
+        - apis
+      summary: Returns your current IP address
+      responses:
+        "200":
+          description: The current IP address
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
