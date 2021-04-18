@@ -19,7 +19,6 @@ RUN adduser -D -H -u 21337 -G app app
 USER app
 
 COPY --from=build /src/build/dist/whoamip ./
-COPY tmpl/ tmpl/
 
 EXPOSE 8080 9100
 
