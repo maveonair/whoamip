@@ -1,6 +1,6 @@
 .PHONY: clean build dev test
 
-VERSION=0.1.0
+VERSION=0.1.1
 
 clean:
 	rm -rf ./dist/*
