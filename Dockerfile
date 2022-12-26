@@ -1,5 +1,5 @@
 # ------------- BUILD --------------- #
-FROM golang:1.16 as build
+FROM golang:1.18 as build
 
 RUN mkdir -p /src/build
 WORKDIR /src/build
