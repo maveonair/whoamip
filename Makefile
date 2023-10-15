@@ -1,6 +1,6 @@
 .PHONY: clean build dev test
 
-VERSION=0.4.0
+VERSION=0.4.1
 
 clean:
 	rm -rf ./dist/*
@@ -13,3 +13,6 @@ dev:
 
 test:
 	go test ./...
+
+release:
+	docker buildx build --platform linux/amd64,linux/arm64 -t maveonair/whoamip:$(VERSION) -t maveonair/whoamip:latest --push .
