@@ -25,3 +25,9 @@ $ curl http://192.168.1.51:8080 | jq
   "ip": "192.168.1.109"
 }
 ```
+
+## Use with Docker Image
+
+```$
+$ docker run -p 8080:8080 maveonair/whoamip
+```
