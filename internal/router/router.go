@@ -42,7 +42,12 @@ func indexHandler() http.HandlerFunc {
 }
 
 func getIpAddr(r *http.Request) (string, error) {
-	forwarded := r.Header.Get("X-Forwarded-For")
+	forwarded := r.Header.Get("X-Original-Forwarded-For")
+	if forwarded != "" {
+		return forwarded, nil
+	}
+
+	forwarded = r.Header.Get("X-Forwarded-For")
 	if forwarded != "" {
 		return forwarded, nil
 	}

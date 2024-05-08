@@ -14,16 +14,24 @@ func TestIndexHandler(t *testing.T) {
 	expectedIpAddr := "27.133.16.173"
 
 	testSuite := []struct {
-		RemoteAddr    string
-		XForwardedFor string
+		ForwardedHeader string
+		RemoteAddr      string
+		XForwardedFor   string
 	}{
 		{
-			RemoteAddr:    fmt.Sprintf("%s:12345", expectedIpAddr),
-			XForwardedFor: "",
+			ForwardedHeader: "X-Forwarded-For",
+			RemoteAddr:      fmt.Sprintf("%s:12345", expectedIpAddr),
+			XForwardedFor:   "",
 		},
 		{
-			RemoteAddr:    "",
-			XForwardedFor: expectedIpAddr,
+			ForwardedHeader: "X-Forwarded-For",
+			RemoteAddr:      "",
+			XForwardedFor:   expectedIpAddr,
+		},
+		{
+			ForwardedHeader: "X-Original-Forwarded-For",
+			RemoteAddr:      fmt.Sprintf("%s:12345", expectedIpAddr),
+			XForwardedFor:   "",
 		},
 	}
 
@@ -34,7 +42,7 @@ func TestIndexHandler(t *testing.T) {
 		}
 
 		req.RemoteAddr = test.RemoteAddr
-		req.Header.Set("X-Forwarded-For", test.XForwardedFor)
+		req.Header.Set(test.ForwardedHeader, test.XForwardedFor)
 
 		res := httptest.NewRecorder()
 		router := router.NewRouter()
